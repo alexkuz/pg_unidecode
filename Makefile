@@ -24,20 +24,19 @@ PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
 
 ifeq ($(PG91),yes)
-all: sql/$(EXTENSION)--$(EXTVERSION).sql $(CHARS_H) $(POS_H)
+all: sql/$(EXTENSION)--$(EXTVERSION).sql
 
 sql/$(EXTENSION)--$(EXTVERSION).sql: sql/$(EXTENSION).sql
 	cp $< $@
-else
-all: $(CHARS_H) $(POS_H)
 endif
+
+prebuild: $(CHARS_H) $(POS_H)
 
 dist:
 	mkdir -p dist
 	git archive --prefix=$(EXTENSION)-$(EXTVERSION)/ HEAD | tar -x -C dist
-	git submodule foreach 'cd $(shell pwd)/$$path && git archive HEAD | tar -x -C $(shell pwd)/dist/$(EXTENSION)-$(EXTVERSION)/$$path'
-	cd dist && zip -r $(EXTENSION)-$(EXTVERSION).zip ./$(EXTENSION)-$(EXTVERSION)
-	rm -rf dist/$(EXTENSION)-$(EXTVERSION)
+	cp -R src/data dist/$(EXTENSION)-$(EXTVERSION)/src
+	cd dist && zip -FSrm $(EXTENSION)-$(EXTVERSION).zip ./$(EXTENSION)-$(EXTVERSION)
 
 $(CHARS_H) $(POS_H): builder/builder.py builder/unidecode/unidecode/*.py
 		python builder/builder.py
