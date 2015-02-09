@@ -33,8 +33,14 @@ all: $(CHARS_H) $(POS_H)
 endif
 
 dist:
-	git archive --format zip --prefix=$(EXTENSION)-$(EXTVERSION)/ -o dist/$(EXTENSION)-$(EXTVERSION).zip HEAD
+	mkdir -p dist
+	git archive --prefix=$(EXTENSION)-$(EXTVERSION)/ HEAD | tar -x -C dist
+	git submodule foreach 'cd $(shell pwd)/$$path && git archive HEAD | tar -x -C $(shell pwd)/dist/$(EXTENSION)-$(EXTVERSION)/$$path'
+	cd dist && zip -r $(EXTENSION)-$(EXTVERSION).zip ./$(EXTENSION)-$(EXTVERSION)
+	rm -rf dist/$(EXTENSION)-$(EXTVERSION)
 
 $(CHARS_H) $(POS_H): builder/builder.py builder/unidecode/unidecode/*.py
 		python builder/builder.py
 $(POS_H): $(CHARS_H)
+
+.PHONY: dist

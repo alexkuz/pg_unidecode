@@ -14,5 +14,12 @@
     "ascii",
     "translit"
   ],
-  "release_status": "testing"
+  "release_status": "testing",
+  "provides": {
+    "unidecode": {
+      "file": "sql/unidecode.sql",
+      "version": "0.0.1",
+      "abstract": "ASCII transliterations of Unicode text"
+    }
+  }
 }
