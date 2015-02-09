@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../src/unidecode.c"
+#include "../src/lib/unidecode.c"
 
 int main() {
   char* in;

@@ -3,7 +3,7 @@ CREATE OR REPLACE FUNCTION
 RETURNS
   TEXT
 AS
-  'pg_unidecode.so', 'pg_unidecode'
+  'unidecode.so', 'unidecode'
 LANGUAGE
   C
 STRICT

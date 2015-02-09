@@ -1,0 +1,10 @@
+CREATE OR REPLACE FUNCTION
+  unidecode( TEXT )
+RETURNS
+  TEXT
+AS
+  'unidecode.so', 'unidecode'
+LANGUAGE
+  C
+STRICT
+IMMUTABLE;
