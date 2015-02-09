@@ -8,12 +8,14 @@ import io
 import re
 
 DATA_DIR = 'builder/unidecode/unidecode'
+BUILD_DIR = 'src/data'
 
 def create_data(data_file, pos_file):
     """
     create_data
     """
-    data_file.write(u'char data[] = "\\\n')
+    data_file.write(u'char chars[] = "\\\n')
+    pos_file.write(u'int pos[] = {\n')
     pos = 0
 
     ranges = {}
@@ -25,14 +27,14 @@ def create_data(data_file, pos_file):
                      filename.endswith('py')}
 
     max_rng = max(ranges.keys())
-    pos_file.write(u'int pos[%d][256] = {\n' % (max_rng + 1))
 
     for rng in xrange(0, max_rng + 1):
-        pos_file.write(u'{' if rng == 0 else u',{')
+        if rng != 0:
+            pos_file.write(u',')
 
         if not rng in ranges:
             pos_file.write(u",".join([u"0" for i in xrange(0, 256)]))
-            pos_file.write(u'}\n')
+            pos_file.write(u'\n')
             continue
 
         path = ranges[rng]
@@ -58,7 +60,7 @@ def create_data(data_file, pos_file):
             pos_file.write((u',%d' if i else u'%d') % pos)
             pos += charlen
         data_file.write(u'\\\n')
-        pos_file.write(u'}\n')
+        pos_file.write(u'\n')
     data_file.write(u'";\n')
     pos_file.write(u'};\n')
 
@@ -67,8 +69,14 @@ def build():
     """
     build
     """
-    with io.open('src/data.h', mode='w') as data_file:
-        with io.open('src/pos.h', mode='w') as pos_file:
+    if not os.path.exists(BUILD_DIR):
+        os.makedirs(BUILD_DIR)
+
+    chars_path = os.path.join(BUILD_DIR, 'chars.h')
+    pos_path = os.path.join(BUILD_DIR, 'pos.h')
+
+    with io.open(chars_path, mode='w') as data_file:
+        with io.open(pos_path, mode='w') as pos_file:
             create_data(data_file, pos_file)
 
 build()

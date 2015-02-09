@@ -1,7 +1,7 @@
-MODULES = src/pg_unidecode
-PG_CONFIG = pg_config
-PGXS = $(shell $(PG_CONFIG) --pgxs)
-INCLUDEDIR = $(shell $(PG_CONFIG) --includedir-server)
+MODULES := src/pg_unidecode
+PG_CONFIG := pg_config
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+INCLUDEDIR := $(shell $(PG_CONFIG) --includedir-server)
 
 include $(PGXS)
 

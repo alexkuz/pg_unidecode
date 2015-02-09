@@ -55,8 +55,8 @@ static int utf8_to_utf32(uint8_t input[], uint32_t output[], size_t count,
 
 int unidecode(char* src, size_t src_len, char** dst, size_t* dst_len) {
   size_t src_uni_len = (src_len + 1) * 4;
-  int n = 0, start, end, subpos;
-  uint32_t c, rng;
+  int n = 0, start, end;
+  uint32_t c;
 
   uint32_t* src_uni = malloc(src_uni_len);
 
@@ -77,24 +77,18 @@ int unidecode(char* src, size_t src_len, char** dst, size_t* dst_len) {
       continue;
     }
 
-    rng = c >> 8;
-    subpos = (int)(c & 0xff);
-
-    start = pos[rng][subpos];
-    if (subpos == 0xff) {
-      if (rng == sizeof(pos) / sizeof(pos[0]) - 1) {
-        end = start + 1;
-      } else {
-        end = pos[rng + 1][0];
-      }
+    start = pos[c];
+    if (c == sizeof(pos) / sizeof(pos[0]) - 1) {
+      end = start + 1;
     } else {
-      end = pos[rng][subpos + 1];
+      end = pos[c + 1];
     }
+
     if (!start) {
       continue;
     }
 
-    strncpy(*dst + n, data + start, end - start);
+    strncpy(*dst + n, chars + start, end - start);
     n += end - start;
   }
 
