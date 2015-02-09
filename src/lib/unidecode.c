@@ -55,12 +55,12 @@ static int utf8_to_utf32(uint8_t input[], uint32_t output[], size_t count,
 
 int unidecode(char* src, size_t src_len, char** dst, size_t* dst_len) {
   size_t src_uni_len = (src_len + 1) * 4;
-  int n = 0, start, end;
-  uint32_t c;
+  int n = 0, start, end, i, res;
+  uint32_t c, *src_uni;
 
-  uint32_t* src_uni = malloc(src_uni_len);
+  src_uni = malloc(src_uni_len);
 
-  int res = utf8_to_utf32((uint8_t*)src, src_uni, src_len, dst_len);
+  res = utf8_to_utf32((uint8_t*)src, src_uni, src_len, dst_len);
 
   if (res == -1) {
     return -1;
@@ -68,7 +68,7 @@ int unidecode(char* src, size_t src_len, char** dst, size_t* dst_len) {
 
   *dst = malloc(*dst_len * 10 + 1);
 
-  for (int i = 0; i < *dst_len; ++i) {
+  for (i = 0; i < *dst_len; ++i) {
     c = src_uni[i];
 
     if (c > 0xeffff) {
