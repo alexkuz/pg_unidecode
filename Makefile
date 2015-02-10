@@ -30,7 +30,7 @@ sql/$(EXTENSION)--$(EXTVERSION).sql: sql/$(EXTENSION).sql
 	cp $< $@
 endif
 
-prebuild: $(CHARS_H) $(POS_H)
+src/unidecode.o: $(CHARS_H) $(POS_H) src/unidecode.c src/lib/unidecode.c
 
 dist:
 	mkdir -p dist

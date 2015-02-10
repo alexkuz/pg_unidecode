@@ -30,6 +30,6 @@ pg_unidecode(PG_FUNCTION_ARGS)
     SET_VARSIZE(new_text, new_text_size);
     memcpy(VARDATA(new_text), out, out_len);
 
-    free(out);
+    pfree(out);
     PG_RETURN_TEXT_P(new_text);
 }

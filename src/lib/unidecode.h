@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <iconv.h>
 
 #include "../data/chars.h"
 #include "../data/pos.h"

@@ -56,29 +56,31 @@ static int utf8_to_utf32(uint8_t input[], uint32_t output[], size_t count,
 int unidecode(char* src, size_t src_len, char** dst, size_t* dst_len) {
   size_t src_uni_len = (src_len + 1) * 4;
   int n = 0, start, end, i, res;
-  uint32_t c, *src_uni;
+  uint32_t c, *src_uni, pos_len;
 
-  src_uni = malloc(src_uni_len);
+  pos_len = sizeof(pos) / sizeof(pos[0]);
 
-  res = utf8_to_utf32((uint8_t*)src, src_uni, src_len, dst_len);
+  src_uni = palloc(src_uni_len);
+
+  res = utf8_to_utf32((uint8_t*)src, src_uni, src_len, &src_uni_len);
 
   if (res == -1) {
     return -1;
   }
 
-  *dst = malloc(*dst_len * 10 + 1);
+  *dst = palloc(src_uni_len * 10 + 1);
 
-  for (i = 0; i < *dst_len; ++i) {
+  for (i = 0; i < src_uni_len; ++i) {
     c = src_uni[i];
 
-    if (c > 0xeffff) {
+    if (c >= pos_len) {
       (*dst)[n] = '?';
       n++;
       continue;
     }
 
     start = pos[c];
-    if (c == sizeof(pos) / sizeof(pos[0]) - 1) {
+    if (c == pos_len - 1) {
       end = start + 1;
     } else {
       end = pos[c + 1];
@@ -92,7 +94,8 @@ int unidecode(char* src, size_t src_len, char** dst, size_t* dst_len) {
     n += end - start;
   }
 
-  (*dst)[n] = '\0';
+  pfree(src_uni);
+
   *dst_len = n;
 
   return 0;

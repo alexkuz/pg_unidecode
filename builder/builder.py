@@ -48,7 +48,7 @@ def create_data(data_file, pos_file):
             charlen = len(char)
 
             char = char.replace('\\', '\\\\')
-            char = ''.join([u'\\x%02d' % ord(c)
+            char = ''.join([u'\\x%02x' % ord(c)
                     if ord(c) < 0x20
                     else c
                     for c in char])
