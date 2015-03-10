@@ -89,8 +89,6 @@ You'll need PostgreSQL (obviously) and Python, if you are building it from git r
 Copyright
 ---------
 
-COPYRIGHT
-
 Copyright 2015, Alexander Kuznetsov <alexkuz@gmail.com>
 
 This project uses transliteration tables from Python [Unidecode](https://github.com/iki/unidecode) library:
