@@ -89,14 +89,14 @@ You'll need PostgreSQL (obviously) and Python, if you are building it from git r
 Copyright
 ---------
 
-Copyright 2015, Alexander Kuznetsov <alexkuz@gmail.com>
+Copyright 2015, Alexander Kuznetsov &lt;alexkuz@gmail.com&gt;
 
 This project uses transliteration tables from Python [Unidecode](https://github.com/iki/unidecode) library:
 
 Original character transliteration tables:
 
-Copyright 2001, Sean M. Burke <sburke@cpan.org>, all rights reserved.
+Copyright 2001, Sean M. Burke &lt;sburke@cpan.org&gt;, all rights reserved.
 
 Python code and later additions:
 
-Copyright 2011, Tomaz Solc <tomaz@zemanta.com>
+Copyright 2011, Tomaz Solc &lt;tomaz@zemanta.com&gt;
