@@ -1,5 +1,6 @@
 pg_unidecode
 ============
+[![PGXN version](https://badge.fury.io/pg/unidecode.svg)](https://badge.fury.io/pg/unidecode)
 
 This postgres extension is a port of [Unidecode](https://github.com/iki/unidecode) library, which provides ASCII transliteration of Unicode symbols:
 
@@ -8,7 +9,7 @@ This postgres extension is a port of [Unidecode](https://github.com/iki/unidecod
     -----------------------------------------------------------------
      Francais, Russkii, Han Yu  and English are my favorite languages
      
-**NB**: this code is in early developing stage and I'm not that great at writing C code, so please don't use it in production yet!
+**NB**: this code was not tested in production, so use it at your own risk.
 
 Installation
 ------------
