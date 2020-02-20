@@ -35,10 +35,11 @@ src/unidecode.o: $(CHARS_H) $(POS_H) src/unidecode.c src/lib/unidecode.c
 dist:
 	mkdir -p dist
 	git archive --prefix=$(EXTENSION)-$(EXTVERSION)/ HEAD | tar -x -C dist
+	cp dist/$(EXTENSION)-$(EXTVERSION)/sql/unidecode.sql dist/$(EXTENSION)-$(EXTVERSION)/sql/unidecode--$(EXTVERSION).sql
 	cp -R src/data dist/$(EXTENSION)-$(EXTVERSION)/src
-	cd dist && zip -FSrm $(EXTENSION)-$(EXTVERSION).zip ./$(EXTENSION)-$(EXTVERSION)
+	cd dist && tar zcvf $(EXTENSION)-$(EXTVERSION).tar.gz ./$(EXTENSION)-$(EXTVERSION) && rm -fR ./$(EXTENSION)-$(EXTVERSION)
 
-$(CHARS_H) $(POS_H): builder/builder.py builder/unidecode/unidecode/*.py
+$(CHARS_H) $(POS_H): builder/builder.py
 		python builder/builder.py
 $(POS_H): $(CHARS_H)
 
