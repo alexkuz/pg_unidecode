@@ -30,4 +30,4 @@
 
 *.pyc
 src/data
-dist
+sql/unidecode-*.sql
