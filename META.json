@@ -2,7 +2,10 @@
   "name": "unidecode",
   "abstract": "ASCII transliterations of Unicode text",
   "version": "0.0.6",
-  "maintainer": "Guillermo Narvaja <guillermo.narvaja@radiocut.fm>",
+  "maintainer": [
+    "Alexander Kuznetsov <alexkuz@gmail.com>",
+    "Guillermo Narvaja <guillermo.narvaja@radiocut.fm>"
+  ],
   "license": "postgresql",
   "meta-spec": {
     "version": "1.0.0",
