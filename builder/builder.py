@@ -2,12 +2,26 @@
 """
 Generates source data
 """
+from __future__ import print_function
+
 import imp
 import os
 import io
 import re
+import sys
 
-DATA_DIR = 'builder/unidecode/unidecode'
+DATA_DIR = os.environ.get("DATA_DIR")
+UNIDECODE_REPOPATH = os.environ.get("UNIDECODE_REPOPATH")
+
+if not DATA_DIR and UNIDECODE_REPOPATH:
+    DATA_DIR = os.path.join(UNIDECODE_REPOPATH, "unidecode")
+
+if not DATA_DIR:
+    print("You must set the environment variable UNIDECODE_REPOPATH with the path of unidecode repository"
+          ", cloned from https://github.com/avian2/unidecode", file=sys.stderr)
+    sys.exit(2)
+
+
 BUILD_DIR = 'src/data'
 
 def create_data(data_file, pos_file):

@@ -1,8 +1,11 @@
 {
   "name": "unidecode",
   "abstract": "ASCII transliterations of Unicode text",
-  "version": "0.0.4",
-  "maintainer": "Alexander Kuznetsov <alexkuz@gmail.com>",
+  "version": "0.0.6",
+  "maintainer": [
+    "Alexander Kuznetsov <alexkuz@gmail.com>",
+    "Guillermo Narvaja <guillermo.narvaja@radiocut.fm>"
+  ],
   "license": "postgresql",
   "meta-spec": {
     "version": "1.0.0",
@@ -18,7 +21,7 @@
   "provides": {
     "unidecode": {
       "file": "sql/unidecode.sql",
-      "version": "0.0.4",
+      "version": "0.0.6",
       "abstract": "ASCII transliterations of Unicode text"
     }
   }
